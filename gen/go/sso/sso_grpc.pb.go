@@ -37,7 +37,7 @@ type AuthClient interface {
 	CheckCode(ctx context.Context, in *CheckCodeRequest, opts ...grpc.CallOption) (*CheckCodeResponse, error)
 	CheckIfUserExists(ctx context.Context, in *UserExistsRequest, opts ...grpc.CallOption) (*UserExistsResponse, error)
 	Logout(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	RefreshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RefreshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 }
 
 type authClient struct {
@@ -98,9 +98,9 @@ func (c *authClient) Logout(ctx context.Context, in *emptypb.Empty, opts ...grpc
 	return out, nil
 }
 
-func (c *authClient) RefreshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *authClient) RefreshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RefreshTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(RefreshTokenResponse)
 	err := c.cc.Invoke(ctx, Auth_RefreshToken_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -117,7 +117,7 @@ type AuthServer interface {
 	CheckCode(context.Context, *CheckCodeRequest) (*CheckCodeResponse, error)
 	CheckIfUserExists(context.Context, *UserExistsRequest) (*UserExistsResponse, error)
 	Logout(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
-	RefreshToken(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
+	RefreshToken(context.Context, *emptypb.Empty) (*RefreshTokenResponse, error)
 	mustEmbedUnimplementedAuthServer()
 }
 
@@ -143,7 +143,7 @@ func (UnimplementedAuthServer) CheckIfUserExists(context.Context, *UserExistsReq
 func (UnimplementedAuthServer) Logout(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
 }
-func (UnimplementedAuthServer) RefreshToken(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+func (UnimplementedAuthServer) RefreshToken(context.Context, *emptypb.Empty) (*RefreshTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
 }
 func (UnimplementedAuthServer) mustEmbedUnimplementedAuthServer() {}

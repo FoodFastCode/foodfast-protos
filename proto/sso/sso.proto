@@ -12,7 +12,7 @@ service Auth{
     rpc CheckCode(CheckCodeRequest) returns (CheckCodeResponse);
     rpc CheckIfUserExists(UserExistsRequest) returns (UserExistsResponse);
     rpc Logout(google.protobuf.Empty) returns (google.protobuf.Empty);
-    rpc RefreshToken(google.protobuf.Empty) returns (google.protobuf.Empty);
+    rpc RefreshToken(google.protobuf.Empty) returns (RefreshTokenResponse);
 }
 
 message RegisterRequest {
@@ -48,4 +48,8 @@ message UserExistsRequest {
 
 message UserExistsResponse {
     bool success = 1;
+}
+
+message RefreshTokenResponse {
+    string access_token = 1;
 }

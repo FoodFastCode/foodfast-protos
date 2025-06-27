@@ -398,6 +398,50 @@ func (x *UserExistsResponse) GetSuccess() bool {
 	return false
 }
 
+type RefreshTokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshTokenResponse) Reset() {
+	*x = RefreshTokenResponse{}
+	mi := &file_sso_sso_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshTokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshTokenResponse) ProtoMessage() {}
+
+func (x *RefreshTokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_sso_sso_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshTokenResponse.ProtoReflect.Descriptor instead.
+func (*RefreshTokenResponse) Descriptor() ([]byte, []int) {
+	return file_sso_sso_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *RefreshTokenResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
 var File_sso_sso_proto protoreflect.FileDescriptor
 
 const file_sso_sso_proto_rawDesc = "" +
@@ -422,14 +466,16 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x11UserExistsRequest\x12\x14\n" +
 	"\x05phone\x18\x01 \x01(\tR\x05phone\".\n" +
 	"\x12UserExistsResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xfc\x02\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"9\n" +
+	"\x14RefreshTokenResponse\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken2\x80\x03\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x129\n" +
 	"\bSendCode\x12\x15.auth.SendCodeRequest\x1a\x16.auth.SendCodeResponse\x12<\n" +
 	"\tCheckCode\x12\x16.auth.CheckCodeRequest\x1a\x17.auth.CheckCodeResponse\x12F\n" +
 	"\x11CheckIfUserExists\x12\x17.auth.UserExistsRequest\x1a\x18.auth.UserExistsResponse\x128\n" +
-	"\x06Logout\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12>\n" +
-	"\fRefreshToken\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.EmptyB\x17Z\x15foodfast.sso.v1;ssov1b\x06proto3"
+	"\x06Logout\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12B\n" +
+	"\fRefreshToken\x12\x16.google.protobuf.Empty\x1a\x1a.auth.RefreshTokenResponseB\x17Z\x15foodfast.sso.v1;ssov1b\x06proto3"
 
 var (
 	file_sso_sso_proto_rawDescOnce sync.Once
@@ -443,31 +489,32 @@ func file_sso_sso_proto_rawDescGZIP() []byte {
 	return file_sso_sso_proto_rawDescData
 }
 
-var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_sso_sso_proto_goTypes = []any{
-	(*RegisterRequest)(nil),    // 0: auth.RegisterRequest
-	(*RegisterResponse)(nil),   // 1: auth.RegisterResponse
-	(*CheckCodeRequest)(nil),   // 2: auth.CheckCodeRequest
-	(*CheckCodeResponse)(nil),  // 3: auth.CheckCodeResponse
-	(*SendCodeRequest)(nil),    // 4: auth.SendCodeRequest
-	(*SendCodeResponse)(nil),   // 5: auth.SendCodeResponse
-	(*UserExistsRequest)(nil),  // 6: auth.UserExistsRequest
-	(*UserExistsResponse)(nil), // 7: auth.UserExistsResponse
-	(*emptypb.Empty)(nil),      // 8: google.protobuf.Empty
+	(*RegisterRequest)(nil),      // 0: auth.RegisterRequest
+	(*RegisterResponse)(nil),     // 1: auth.RegisterResponse
+	(*CheckCodeRequest)(nil),     // 2: auth.CheckCodeRequest
+	(*CheckCodeResponse)(nil),    // 3: auth.CheckCodeResponse
+	(*SendCodeRequest)(nil),      // 4: auth.SendCodeRequest
+	(*SendCodeResponse)(nil),     // 5: auth.SendCodeResponse
+	(*UserExistsRequest)(nil),    // 6: auth.UserExistsRequest
+	(*UserExistsResponse)(nil),   // 7: auth.UserExistsResponse
+	(*RefreshTokenResponse)(nil), // 8: auth.RefreshTokenResponse
+	(*emptypb.Empty)(nil),        // 9: google.protobuf.Empty
 }
 var file_sso_sso_proto_depIdxs = []int32{
 	0, // 0: auth.Auth.Register:input_type -> auth.RegisterRequest
 	4, // 1: auth.Auth.SendCode:input_type -> auth.SendCodeRequest
 	2, // 2: auth.Auth.CheckCode:input_type -> auth.CheckCodeRequest
 	6, // 3: auth.Auth.CheckIfUserExists:input_type -> auth.UserExistsRequest
-	8, // 4: auth.Auth.Logout:input_type -> google.protobuf.Empty
-	8, // 5: auth.Auth.RefreshToken:input_type -> google.protobuf.Empty
+	9, // 4: auth.Auth.Logout:input_type -> google.protobuf.Empty
+	9, // 5: auth.Auth.RefreshToken:input_type -> google.protobuf.Empty
 	1, // 6: auth.Auth.Register:output_type -> auth.RegisterResponse
 	5, // 7: auth.Auth.SendCode:output_type -> auth.SendCodeResponse
 	3, // 8: auth.Auth.CheckCode:output_type -> auth.CheckCodeResponse
 	7, // 9: auth.Auth.CheckIfUserExists:output_type -> auth.UserExistsResponse
-	8, // 10: auth.Auth.Logout:output_type -> google.protobuf.Empty
-	8, // 11: auth.Auth.RefreshToken:output_type -> google.protobuf.Empty
+	9, // 10: auth.Auth.Logout:output_type -> google.protobuf.Empty
+	8, // 11: auth.Auth.RefreshToken:output_type -> auth.RefreshTokenResponse
 	6, // [6:12] is the sub-list for method output_type
 	0, // [0:6] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -486,7 +533,7 @@ func file_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sso_sso_proto_rawDesc), len(file_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
