@@ -19,6 +19,7 @@ message RegisterRequest {
     int64 telegram_id = 1;
     string username = 2;
     string name = 3;
+    string phone = 4;
 }
 
 message RegisterResponse {
