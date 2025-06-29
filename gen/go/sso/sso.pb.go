@@ -318,27 +318,27 @@ func (x *SendCodeResponse) GetSuccess() bool {
 	return false
 }
 
-type UserExistsRequest struct {
+type UserExistsByPhoneRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Phone         string                 `protobuf:"bytes,1,opt,name=phone,proto3" json:"phone,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserExistsRequest) Reset() {
-	*x = UserExistsRequest{}
+func (x *UserExistsByPhoneRequest) Reset() {
+	*x = UserExistsByPhoneRequest{}
 	mi := &file_sso_sso_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserExistsRequest) String() string {
+func (x *UserExistsByPhoneRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserExistsRequest) ProtoMessage() {}
+func (*UserExistsByPhoneRequest) ProtoMessage() {}
 
-func (x *UserExistsRequest) ProtoReflect() protoreflect.Message {
+func (x *UserExistsByPhoneRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_sso_sso_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -350,16 +350,60 @@ func (x *UserExistsRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserExistsRequest.ProtoReflect.Descriptor instead.
-func (*UserExistsRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use UserExistsByPhoneRequest.ProtoReflect.Descriptor instead.
+func (*UserExistsByPhoneRequest) Descriptor() ([]byte, []int) {
 	return file_sso_sso_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *UserExistsRequest) GetPhone() string {
+func (x *UserExistsByPhoneRequest) GetPhone() string {
 	if x != nil {
 		return x.Phone
 	}
 	return ""
+}
+
+type UserExistsByTelegramIDRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TelegramId    int64                  `protobuf:"varint,1,opt,name=telegram_id,json=telegramId,proto3" json:"telegram_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserExistsByTelegramIDRequest) Reset() {
+	*x = UserExistsByTelegramIDRequest{}
+	mi := &file_sso_sso_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserExistsByTelegramIDRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserExistsByTelegramIDRequest) ProtoMessage() {}
+
+func (x *UserExistsByTelegramIDRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_sso_sso_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserExistsByTelegramIDRequest.ProtoReflect.Descriptor instead.
+func (*UserExistsByTelegramIDRequest) Descriptor() ([]byte, []int) {
+	return file_sso_sso_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *UserExistsByTelegramIDRequest) GetTelegramId() int64 {
+	if x != nil {
+		return x.TelegramId
+	}
+	return 0
 }
 
 type UserExistsResponse struct {
@@ -371,7 +415,7 @@ type UserExistsResponse struct {
 
 func (x *UserExistsResponse) Reset() {
 	*x = UserExistsResponse{}
-	mi := &file_sso_sso_proto_msgTypes[7]
+	mi := &file_sso_sso_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -383,7 +427,7 @@ func (x *UserExistsResponse) String() string {
 func (*UserExistsResponse) ProtoMessage() {}
 
 func (x *UserExistsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sso_sso_proto_msgTypes[7]
+	mi := &file_sso_sso_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -396,7 +440,7 @@ func (x *UserExistsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserExistsResponse.ProtoReflect.Descriptor instead.
 func (*UserExistsResponse) Descriptor() ([]byte, []int) {
-	return file_sso_sso_proto_rawDescGZIP(), []int{7}
+	return file_sso_sso_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *UserExistsResponse) GetSuccess() bool {
@@ -415,7 +459,7 @@ type RefreshTokenResponse struct {
 
 func (x *RefreshTokenResponse) Reset() {
 	*x = RefreshTokenResponse{}
-	mi := &file_sso_sso_proto_msgTypes[8]
+	mi := &file_sso_sso_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -427,7 +471,7 @@ func (x *RefreshTokenResponse) String() string {
 func (*RefreshTokenResponse) ProtoMessage() {}
 
 func (x *RefreshTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_sso_sso_proto_msgTypes[8]
+	mi := &file_sso_sso_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -440,7 +484,7 @@ func (x *RefreshTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RefreshTokenResponse.ProtoReflect.Descriptor instead.
 func (*RefreshTokenResponse) Descriptor() ([]byte, []int) {
-	return file_sso_sso_proto_rawDescGZIP(), []int{8}
+	return file_sso_sso_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *RefreshTokenResponse) GetAccessToken() string {
@@ -471,18 +515,22 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x0fSendCodeRequest\x12\x14\n" +
 	"\x05phone\x18\x01 \x01(\tR\x05phone\",\n" +
 	"\x10SendCodeResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess\")\n" +
-	"\x11UserExistsRequest\x12\x14\n" +
-	"\x05phone\x18\x01 \x01(\tR\x05phone\".\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"0\n" +
+	"\x18UserExistsByPhoneRequest\x12\x14\n" +
+	"\x05phone\x18\x01 \x01(\tR\x05phone\"@\n" +
+	"\x1dUserExistsByTelegramIDRequest\x12\x1f\n" +
+	"\vtelegram_id\x18\x01 \x01(\x03R\n" +
+	"telegramId\".\n" +
 	"\x12UserExistsResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"9\n" +
 	"\x14RefreshTokenResponse\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken2\x80\x03\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken2\xee\x03\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x129\n" +
 	"\bSendCode\x12\x15.auth.SendCodeRequest\x1a\x16.auth.SendCodeResponse\x12<\n" +
-	"\tCheckCode\x12\x16.auth.CheckCodeRequest\x1a\x17.auth.CheckCodeResponse\x12F\n" +
-	"\x11CheckIfUserExists\x12\x17.auth.UserExistsRequest\x1a\x18.auth.UserExistsResponse\x128\n" +
+	"\tCheckCode\x12\x16.auth.CheckCodeRequest\x1a\x17.auth.CheckCodeResponse\x12T\n" +
+	"\x18CheckIfUserExistsByPhone\x12\x1e.auth.UserExistsByPhoneRequest\x1a\x18.auth.UserExistsResponse\x12^\n" +
+	"\x1dCheckIfUserExistsByTelegramID\x12#.auth.UserExistsByTelegramIDRequest\x1a\x18.auth.UserExistsResponse\x128\n" +
 	"\x06Logout\x12\x16.google.protobuf.Empty\x1a\x16.google.protobuf.Empty\x12B\n" +
 	"\fRefreshToken\x12\x16.google.protobuf.Empty\x1a\x1a.auth.RefreshTokenResponseB\x17Z\x15foodfast.sso.v1;ssov1b\x06proto3"
 
@@ -498,37 +546,40 @@ func file_sso_sso_proto_rawDescGZIP() []byte {
 	return file_sso_sso_proto_rawDescData
 }
 
-var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_sso_sso_proto_goTypes = []any{
-	(*RegisterRequest)(nil),      // 0: auth.RegisterRequest
-	(*RegisterResponse)(nil),     // 1: auth.RegisterResponse
-	(*CheckCodeRequest)(nil),     // 2: auth.CheckCodeRequest
-	(*CheckCodeResponse)(nil),    // 3: auth.CheckCodeResponse
-	(*SendCodeRequest)(nil),      // 4: auth.SendCodeRequest
-	(*SendCodeResponse)(nil),     // 5: auth.SendCodeResponse
-	(*UserExistsRequest)(nil),    // 6: auth.UserExistsRequest
-	(*UserExistsResponse)(nil),   // 7: auth.UserExistsResponse
-	(*RefreshTokenResponse)(nil), // 8: auth.RefreshTokenResponse
-	(*emptypb.Empty)(nil),        // 9: google.protobuf.Empty
+	(*RegisterRequest)(nil),               // 0: auth.RegisterRequest
+	(*RegisterResponse)(nil),              // 1: auth.RegisterResponse
+	(*CheckCodeRequest)(nil),              // 2: auth.CheckCodeRequest
+	(*CheckCodeResponse)(nil),             // 3: auth.CheckCodeResponse
+	(*SendCodeRequest)(nil),               // 4: auth.SendCodeRequest
+	(*SendCodeResponse)(nil),              // 5: auth.SendCodeResponse
+	(*UserExistsByPhoneRequest)(nil),      // 6: auth.UserExistsByPhoneRequest
+	(*UserExistsByTelegramIDRequest)(nil), // 7: auth.UserExistsByTelegramIDRequest
+	(*UserExistsResponse)(nil),            // 8: auth.UserExistsResponse
+	(*RefreshTokenResponse)(nil),          // 9: auth.RefreshTokenResponse
+	(*emptypb.Empty)(nil),                 // 10: google.protobuf.Empty
 }
 var file_sso_sso_proto_depIdxs = []int32{
-	0, // 0: auth.Auth.Register:input_type -> auth.RegisterRequest
-	4, // 1: auth.Auth.SendCode:input_type -> auth.SendCodeRequest
-	2, // 2: auth.Auth.CheckCode:input_type -> auth.CheckCodeRequest
-	6, // 3: auth.Auth.CheckIfUserExists:input_type -> auth.UserExistsRequest
-	9, // 4: auth.Auth.Logout:input_type -> google.protobuf.Empty
-	9, // 5: auth.Auth.RefreshToken:input_type -> google.protobuf.Empty
-	1, // 6: auth.Auth.Register:output_type -> auth.RegisterResponse
-	5, // 7: auth.Auth.SendCode:output_type -> auth.SendCodeResponse
-	3, // 8: auth.Auth.CheckCode:output_type -> auth.CheckCodeResponse
-	7, // 9: auth.Auth.CheckIfUserExists:output_type -> auth.UserExistsResponse
-	9, // 10: auth.Auth.Logout:output_type -> google.protobuf.Empty
-	8, // 11: auth.Auth.RefreshToken:output_type -> auth.RefreshTokenResponse
-	6, // [6:12] is the sub-list for method output_type
-	0, // [0:6] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	0,  // 0: auth.Auth.Register:input_type -> auth.RegisterRequest
+	4,  // 1: auth.Auth.SendCode:input_type -> auth.SendCodeRequest
+	2,  // 2: auth.Auth.CheckCode:input_type -> auth.CheckCodeRequest
+	6,  // 3: auth.Auth.CheckIfUserExistsByPhone:input_type -> auth.UserExistsByPhoneRequest
+	7,  // 4: auth.Auth.CheckIfUserExistsByTelegramID:input_type -> auth.UserExistsByTelegramIDRequest
+	10, // 5: auth.Auth.Logout:input_type -> google.protobuf.Empty
+	10, // 6: auth.Auth.RefreshToken:input_type -> google.protobuf.Empty
+	1,  // 7: auth.Auth.Register:output_type -> auth.RegisterResponse
+	5,  // 8: auth.Auth.SendCode:output_type -> auth.SendCodeResponse
+	3,  // 9: auth.Auth.CheckCode:output_type -> auth.CheckCodeResponse
+	8,  // 10: auth.Auth.CheckIfUserExistsByPhone:output_type -> auth.UserExistsResponse
+	8,  // 11: auth.Auth.CheckIfUserExistsByTelegramID:output_type -> auth.UserExistsResponse
+	10, // 12: auth.Auth.Logout:output_type -> google.protobuf.Empty
+	9,  // 13: auth.Auth.RefreshToken:output_type -> auth.RefreshTokenResponse
+	7,  // [7:14] is the sub-list for method output_type
+	0,  // [0:7] is the sub-list for method input_type
+	0,  // [0:0] is the sub-list for extension type_name
+	0,  // [0:0] is the sub-list for extension extendee
+	0,  // [0:0] is the sub-list for field type_name
 }
 
 func init() { file_sso_sso_proto_init() }
@@ -542,7 +593,7 @@ func file_sso_sso_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_sso_sso_proto_rawDesc), len(file_sso_sso_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

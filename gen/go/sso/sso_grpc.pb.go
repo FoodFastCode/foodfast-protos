@@ -20,12 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Auth_Register_FullMethodName          = "/auth.Auth/Register"
-	Auth_SendCode_FullMethodName          = "/auth.Auth/SendCode"
-	Auth_CheckCode_FullMethodName         = "/auth.Auth/CheckCode"
-	Auth_CheckIfUserExists_FullMethodName = "/auth.Auth/CheckIfUserExists"
-	Auth_Logout_FullMethodName            = "/auth.Auth/Logout"
-	Auth_RefreshToken_FullMethodName      = "/auth.Auth/RefreshToken"
+	Auth_Register_FullMethodName                      = "/auth.Auth/Register"
+	Auth_SendCode_FullMethodName                      = "/auth.Auth/SendCode"
+	Auth_CheckCode_FullMethodName                     = "/auth.Auth/CheckCode"
+	Auth_CheckIfUserExistsByPhone_FullMethodName      = "/auth.Auth/CheckIfUserExistsByPhone"
+	Auth_CheckIfUserExistsByTelegramID_FullMethodName = "/auth.Auth/CheckIfUserExistsByTelegramID"
+	Auth_Logout_FullMethodName                        = "/auth.Auth/Logout"
+	Auth_RefreshToken_FullMethodName                  = "/auth.Auth/RefreshToken"
 )
 
 // AuthClient is the client API for Auth service.
@@ -35,7 +36,8 @@ type AuthClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	SendCode(ctx context.Context, in *SendCodeRequest, opts ...grpc.CallOption) (*SendCodeResponse, error)
 	CheckCode(ctx context.Context, in *CheckCodeRequest, opts ...grpc.CallOption) (*CheckCodeResponse, error)
-	CheckIfUserExists(ctx context.Context, in *UserExistsRequest, opts ...grpc.CallOption) (*UserExistsResponse, error)
+	CheckIfUserExistsByPhone(ctx context.Context, in *UserExistsByPhoneRequest, opts ...grpc.CallOption) (*UserExistsResponse, error)
+	CheckIfUserExistsByTelegramID(ctx context.Context, in *UserExistsByTelegramIDRequest, opts ...grpc.CallOption) (*UserExistsResponse, error)
 	Logout(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	RefreshToken(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RefreshTokenResponse, error)
 }
@@ -78,10 +80,20 @@ func (c *authClient) CheckCode(ctx context.Context, in *CheckCodeRequest, opts .
 	return out, nil
 }
 
-func (c *authClient) CheckIfUserExists(ctx context.Context, in *UserExistsRequest, opts ...grpc.CallOption) (*UserExistsResponse, error) {
+func (c *authClient) CheckIfUserExistsByPhone(ctx context.Context, in *UserExistsByPhoneRequest, opts ...grpc.CallOption) (*UserExistsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UserExistsResponse)
-	err := c.cc.Invoke(ctx, Auth_CheckIfUserExists_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Auth_CheckIfUserExistsByPhone_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authClient) CheckIfUserExistsByTelegramID(ctx context.Context, in *UserExistsByTelegramIDRequest, opts ...grpc.CallOption) (*UserExistsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserExistsResponse)
+	err := c.cc.Invoke(ctx, Auth_CheckIfUserExistsByTelegramID_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -115,7 +127,8 @@ type AuthServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	SendCode(context.Context, *SendCodeRequest) (*SendCodeResponse, error)
 	CheckCode(context.Context, *CheckCodeRequest) (*CheckCodeResponse, error)
-	CheckIfUserExists(context.Context, *UserExistsRequest) (*UserExistsResponse, error)
+	CheckIfUserExistsByPhone(context.Context, *UserExistsByPhoneRequest) (*UserExistsResponse, error)
+	CheckIfUserExistsByTelegramID(context.Context, *UserExistsByTelegramIDRequest) (*UserExistsResponse, error)
 	Logout(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	RefreshToken(context.Context, *emptypb.Empty) (*RefreshTokenResponse, error)
 	mustEmbedUnimplementedAuthServer()
@@ -137,8 +150,11 @@ func (UnimplementedAuthServer) SendCode(context.Context, *SendCodeRequest) (*Sen
 func (UnimplementedAuthServer) CheckCode(context.Context, *CheckCodeRequest) (*CheckCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckCode not implemented")
 }
-func (UnimplementedAuthServer) CheckIfUserExists(context.Context, *UserExistsRequest) (*UserExistsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckIfUserExists not implemented")
+func (UnimplementedAuthServer) CheckIfUserExistsByPhone(context.Context, *UserExistsByPhoneRequest) (*UserExistsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckIfUserExistsByPhone not implemented")
+}
+func (UnimplementedAuthServer) CheckIfUserExistsByTelegramID(context.Context, *UserExistsByTelegramIDRequest) (*UserExistsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckIfUserExistsByTelegramID not implemented")
 }
 func (UnimplementedAuthServer) Logout(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logout not implemented")
@@ -221,20 +237,38 @@ func _Auth_CheckCode_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Auth_CheckIfUserExists_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UserExistsRequest)
+func _Auth_CheckIfUserExistsByPhone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserExistsByPhoneRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AuthServer).CheckIfUserExists(ctx, in)
+		return srv.(AuthServer).CheckIfUserExistsByPhone(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Auth_CheckIfUserExists_FullMethodName,
+		FullMethod: Auth_CheckIfUserExistsByPhone_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).CheckIfUserExists(ctx, req.(*UserExistsRequest))
+		return srv.(AuthServer).CheckIfUserExistsByPhone(ctx, req.(*UserExistsByPhoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Auth_CheckIfUserExistsByTelegramID_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserExistsByTelegramIDRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServer).CheckIfUserExistsByTelegramID(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Auth_CheckIfUserExistsByTelegramID_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServer).CheckIfUserExistsByTelegramID(ctx, req.(*UserExistsByTelegramIDRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -295,8 +329,12 @@ var Auth_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Auth_CheckCode_Handler,
 		},
 		{
-			MethodName: "CheckIfUserExists",
-			Handler:    _Auth_CheckIfUserExists_Handler,
+			MethodName: "CheckIfUserExistsByPhone",
+			Handler:    _Auth_CheckIfUserExistsByPhone_Handler,
+		},
+		{
+			MethodName: "CheckIfUserExistsByTelegramID",
+			Handler:    _Auth_CheckIfUserExistsByTelegramID_Handler,
 		},
 		{
 			MethodName: "Logout",
