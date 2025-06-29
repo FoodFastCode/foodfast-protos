@@ -10,7 +10,8 @@ service Auth{
     rpc Register(RegisterRequest) returns (RegisterResponse);
     rpc SendCode(SendCodeRequest) returns (SendCodeResponse);
     rpc CheckCode(CheckCodeRequest) returns (CheckCodeResponse);
-    rpc CheckIfUserExists(UserExistsRequest) returns (UserExistsResponse);
+    rpc CheckIfUserExistsByPhone(UserExistsByPhoneRequest) returns (UserExistsResponse);
+    rpc CheckIfUserExistsByTelegramID(UserExistsByTelegramIDRequest) returns (UserExistsResponse);
     rpc Logout(google.protobuf.Empty) returns (google.protobuf.Empty);
     rpc RefreshToken(google.protobuf.Empty) returns (RefreshTokenResponse);
 }
@@ -43,8 +44,12 @@ message SendCodeResponse {
     bool success = 1;
 }
 
-message UserExistsRequest {
+message UserExistsByPhoneRequest {
     string phone = 1;
+}
+
+message UserExistsByTelegramIDRequest {
+    int64 telegram_id = 1;
 }
 
 message UserExistsResponse {
